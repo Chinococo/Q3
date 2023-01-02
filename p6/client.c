@@ -29,13 +29,13 @@ int main(){
 
     send(clientSocket,buffer,nBytes,0);
     if (buffer[0]=='B'&&buffer[1]=='y'&&buffer[2]=='e'){
-        	printf("close Socket");
+        	printf("close Socket\n");
         	exit(0);
     }	
     recv(clientSocket, buffer, 1024, 0);
     printf("Server Said: %s\n",buffer);   
     if (buffer[0]=='B'&&buffer[1]=='y'&&buffer[2]=='e'){
-        	printf("close Socket");
+        	printf("close Socket\n");
         	exit(0);
     }
   }
