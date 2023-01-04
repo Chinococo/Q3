@@ -20,7 +20,10 @@ unsigned long fsize(char* file) {
     fclose(f);
     return len;
 }
-int main(void) {
+int main(int argc, char *argv[]) {
+    char * name =(char *)malloc(sizeof(char)*100);
+    //printf("%s",argv[1]);
+    sprintf(name,"./%s",argv[1]);
     struct sockaddr_in si_other;
     char message[BUFLEN], fname[20], str[10];
     FILE *f;
@@ -36,9 +39,9 @@ int main(void) {
         exit(1);
     }
     
-    FILE *fp = fopen("./google.png", "rb");
+    FILE *fp = fopen(name, "rb");
     fseek(fp, 0L, SEEK_END);
-    unsigned char buff[256] = {0};
+    unsigned char buff[255] = {0};
     // calculating the size of the file
     long int res = ftell(fp);
     sprintf(buff,"%ld", res);
@@ -50,7 +53,7 @@ int main(void) {
     while (1) {
 /* First read file in chunks of 256 bytes */
         //unsigned char buff[256] = {0};
-        int nread = fread(buff, 1, 256, fp);
+        int nread = fread(buff, 1, 255, fp);
         //printf("Bytes read %d \n", nread);
         if (nread > 0) {
             //printf("Sending %s\n",buff);
@@ -58,7 +61,7 @@ int main(void) {
         }
 /* There is something tricky going on with read ..
 * Either there was error, or we reached end of file. */
-        if (nread < 256) {
+        if (nread < 255) {
             /*
             if (feof(fp))
                 printf("End of file\n");

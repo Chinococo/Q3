@@ -33,7 +33,7 @@ int main(void) {
     }
     recv_len = recvfrom(s, buf, sizeof(buf), 0, (struct sockaddr *) &si_other, &slen);
     int len = atoi(buf);
-    strcpy(fname, "output.png");
+    strcpy(fname, "receive.png");
     fp = fopen(fname, "wb");
     memset(buf, 0, BUFLEN);
     for(int i=0;i<len/256+1;i++){
